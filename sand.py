@@ -1,4 +1,5 @@
 from openpyxl import Workbook
+from reader import Reader as Reader
 wb=Workbook()
 ws=wb.active
 ws.title='abcd'
@@ -9,6 +10,7 @@ j.reverse()
 print(i)
 print(j)
 ws.append(i)
+ws.append(Reader('*').getContent())
 ws=wb.create_sheet('dcb')
 ws.append(j)
 wb.save('abcd.xlsx')

@@ -10,8 +10,6 @@ class Reader:
         g=glob(self.getMask())
         return(g)
 
-b=Reader('*').getContent()
 
-print(type(b))
-print(b)
+
 
