@@ -4,10 +4,14 @@ def tree(aString):
         print(aString)
 
 def tree1(aChar,aNumber):
+    aParagraph=''
     for x in range(aNumber):
-        print(aChar*x)
+        aParagraph += (aChar*x) +'\n'
+    return aParagraph
 
 
 
 tree('*****')
-tree1('*',6)
+aText=tree1('*',6)
+
+print(aText)
