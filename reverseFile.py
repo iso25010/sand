@@ -1,16 +1,22 @@
 class Reverse:
     def __init__(self):
         self.stack=list()
+
     def push(self,anObject):
         self.stack.append(anObject)
+
     def pop(self):
         return self.stack.pop(-1)
+
     def pushStack(self,inFile):
-        with open(inFile, mode='r') as inF:
-            for char in inF:
+        with open(inFile, mode='rt') as inF:
+            char=inF.read(1)
+            while char!='':
                 self.push(char)
+                char=inF.read(1)  
+
     def emptyStack(self,outFile):
-        with open(outFile,mode='w') as outF:
+        with open(outFile,mode='wt') as outF:
             while self.stack:
                 aChar= self.pop()
                 outF.write(aChar)
