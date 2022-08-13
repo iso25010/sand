@@ -21,9 +21,10 @@ class Reverse:
 
 
 r=Reverse()
-aFile='c:\\Users\\zd004868\\Documents\\git\\array.py'
+
+aFile=str(input('Input a source file: '))
 r.pushStack(aFile)
 r.printStack()
-r.emptyStack('c:\\Users\\zd004868\\Documents\\git\\meat.txt')
+aFile=str(input('Input an output file: '))
+r.emptyStack(aFile)
 r.printStack()
-
