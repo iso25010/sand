@@ -1,3 +1,8 @@
-for x in range(1,10):
-    if x %2:
-        print('{0:^10}'.format('*'*x))
+def cTree(aBase):
+    for x in range(1,aBase):
+        if x %2:
+           
+            print('{:^{}}'.format('*'*x,aBase))
+
+
+cTree(int(input('Base : ')))
