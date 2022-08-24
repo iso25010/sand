@@ -29,8 +29,15 @@ class Reverse:
 r=Reverse()
 
 aFile=str(input('Input a source file: '))
-r.pushStack(aFile)
-r.printStack()
-aFile=str(input('Input an output file: '))
-r.emptyStack(aFile)
-r.printStack()
+
+try:
+    r.pushStack(aFile)
+    try:
+        aFile=str(input('Input an output file: '))
+        r.emptyStack(aFile)
+    except:
+        print('Problem with the output file')
+except:
+    print('Problem with the input file')
+
+
