@@ -23,7 +23,15 @@ class Evidence():
             lE.append(i[0])
             lR.append(float(i[1]))
         return(lE,lR)
-
+    def __iter__(self):
+        self.i=-1
+        return self
+    def __next__(self):
+        self.i+=1
+        try:
+            return(Empl(self.lHours[self.i],self.lWeeks[self.i],self.lEmplo[self.i],self.lRates[self.i]))
+        except IndexError:
+            raise StopIteration
 
 
 hours=[22, 17, 27, 40, 45]
@@ -31,9 +39,5 @@ weeks=[48, 50, 42, 46, 43]
 emplo=['John,1', 'Eric,1.5', 'Terry,2', 'Michael,4', 'Graham,2']
 
 ev=Evidence(hours,weeks,emplo)
-
-e=Empl(8,3,'John',1.3)
-
-
-
-print(e)
+for person in ev:
+    print(person)
