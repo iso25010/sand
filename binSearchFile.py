@@ -4,16 +4,30 @@ from turtle import begin_fill
 
 class BinSearch():
     def __init__(self,aFile):
+        #starting position where the reading of a file starts from
         self.position=0
+        #the file with a sequence of numbers
         self.file=aFile
+        #initial setUp for the reading
         self.setPosition(self.position)
         self.resetBuffer()
         self.counter=0
-        self.members=1000
-        self.left=0,0
+        #how many members contains the buffer
+        self.members=4
+        #left interval ... counter, position
+        self.left=[0,0]
+        #self.counter+1, self.file.tell() .... counting how manny numbers has the sequence
         self.right=self.howMany()
-        self.middle=self.getRN()//2,0
+        print('many',self.getRN())
         #self.look=self.inputNumber()
+        
+        #middle of the sequence , it's position in the file
+        #this piece is a corner stone for a method binSearch ...
+        self.middle=[self.getRN()//2,0]
+        
+
+        
+        self.resetBuffer()
         self.counter=0
         self.setPosition(0)
         self.midNumber=self.findMidNum()
@@ -61,34 +75,38 @@ class BinSearch():
         check=True
         while (self.counter < self.getMN()) and check:
             check=self.readNumbers()
-           # print(self.counter,'<= ',self.getMN())
+            print(self.counter,'< ',self.getMN())
         if self.buffer:
-            index=self.counter-self.getMN()
+            
             indexOfPosition=[i for i,x in enumerate(self.buffer) if x==';']
-            print('indexPosition:{0}\n index:{1}\n buffer:{2}\n counter:{3}\n'.format(indexOfPosition,index,self.buffer,self.counter))
+            index=len(indexOfPosition) -1 - (self.counter-self.getMN())
+            print('indexPosition:{0}\n index:{1}\n buffer:{2}\n counter:{3}\n MN:{4}'.format(indexOfPosition,index,self.buffer,self.counter,self.getMN()))
             if index==0:
                 midNumber=self.buffer[:indexOfPosition[index]]
-                #musime osetrit neuplne cislo, ktere ma kus v BackUp
+                #doplnit neuplne cislo, ktere ma kus v BackUp
                 if self.backUp:
                     if self.backUp[-1] != ';':
                         beginI=self.backUp.rfind(';')
                         begin=self.backUp[beginI+1:]
                         begin+=midNumber
                         midNumber=int(begin)
-                print(self.buffer)
                 
-            else:
                 
+            else:          
+                
+                
+               
+                print(indexOfPosition[index-1]+1,',',indexOfPosition[index])
                 midNumber=int(self.buffer[indexOfPosition[index-1]+1:indexOfPosition[index]])
+                print('mi:',midNumber)
+                
+            self.setMP(indexOfPosition[index]+self.backCounter)
             return midNumber
         return -1
 
-
-
-
-
     def readNumbers(self):
         self.backUp=self.buffer
+        self.backCounter=self.file.tell()
         self.buffer=self.file.read(self.members)
         self.counter += self.buffer.count(';')
         if self.buffer:
@@ -100,18 +118,20 @@ class BinSearch():
         while self.readNumbers():
             pass
         #last=self.backUp.split(';')[-2]
-        return self.counter+1, self.file.tell()
+        return [self.counter, self.file.tell()]
 
     def inputNumber(self):
         return int(input('What number are you looking for? :'))
 
     
 
+fSet='/media/zed/NTB/Dev/set.txt'
+fs='set.txt'
+t='testBin.dat'
 
-
-with open('set.txt',mode='rt') as f:
+with open(t,mode='rt') as f:
     bs=BinSearch(f)
-    print(bs.midNumber)
+    print(bs.midNumber,bs.getMN(),bs.getMP())
 
     #f.seek(position-1)
     #print(f.read(1))
