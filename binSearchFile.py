@@ -1,7 +1,4 @@
 
-from turtle import begin_fill
-
-
 class BinSearch():
     def __init__(self,aFile):
         #starting position where the reading of a file starts from
@@ -11,26 +8,56 @@ class BinSearch():
         #initial setUp for the reading
         self.setPosition(self.position)
         self.resetBuffer()
+        #a current number of the field of numbers
         self.counter=0
         #how many members contains the buffer
-        self.members=4
+        self.members=1000
         #left interval ... counter, position
         self.left=[0,0]
-        #self.counter+1, self.file.tell() .... counting how manny numbers has the sequence
+        #self.counter, self.file.tell() .... counting how manny numbers has the sequence
         self.right=self.howMany()
-        print('many',self.getRN())
-        #self.look=self.inputNumber()
-        
-        #middle of the sequence , it's position in the file
-        #this piece is a corner stone for a method binSearch ...
-        self.middle=[self.getRN()//2,0]
-        
-
-        
-        self.resetBuffer()
+        #reset counter and setUp 0 position of the file
         self.counter=0
         self.setPosition(0)
-        self.midNumber=self.findMidNum()
+        #a middle of the interval
+        self.middle=[0,0]
+        #the number we are looking for ...
+        self.look=self.inputNumber()
+        
+        
+    def search(self):
+        #middle of the interval, position ... initial setUp
+                
+        while self.getLN()<=self.getRN():
+            self.resetBuffer()
+            #self.middle=[self.getRN()//2,0]
+            self.setMN((self.getLN()+self.getRN())//2)
+            #set counter at the left interval    
+            self.counter=self.getLN()    
+            #set position in the file
+            if self.getLN() != 0:
+                self.position=self.getLP()+1
+            else:
+                self.position=self.getLP()
+            self.setPosition(self.position)
+            self.midNumber=self.findMidNum()
+            if self.look==self.midNumber:
+                #we found the number
+                return self.midNumber,self.getMN(),self.getMP()
+            #looking number > middle number -> shift the interval to the right
+            if self.look>self.midNumber:
+                self.setLN(self.getMN())
+                self.setLP(self.getMP())
+               
+            #looking number < middle number -> shift the interval to the left
+            if self.look<self.midNumber:
+                self.setRN(self.getMN())
+                self.setRP(self.getMP())
+        return 0
+            
+            
+        
+
 
     def setPosition(self,p):
         self.file.seek(self.position)
@@ -75,12 +102,9 @@ class BinSearch():
         check=True
         while (self.counter < self.getMN()) and check:
             check=self.readNumbers()
-            print(self.counter,'< ',self.getMN())
-        if self.buffer:
-            
+        if self.buffer: 
             indexOfPosition=[i for i,x in enumerate(self.buffer) if x==';']
             index=len(indexOfPosition) -1 - (self.counter-self.getMN())
-            print('indexPosition:{0}\n index:{1}\n buffer:{2}\n counter:{3}\n MN:{4}'.format(indexOfPosition,index,self.buffer,self.counter,self.getMN()))
             if index==0:
                 midNumber=self.buffer[:indexOfPosition[index]]
                 #doplnit neuplne cislo, ktere ma kus v BackUp
@@ -89,19 +113,13 @@ class BinSearch():
                         beginI=self.backUp.rfind(';')
                         begin=self.backUp[beginI+1:]
                         begin+=midNumber
-                        midNumber=int(begin)
-                
-                
+                        midNumber=begin             
             else:          
-                
-                
-               
-                print(indexOfPosition[index-1]+1,',',indexOfPosition[index])
-                midNumber=int(self.buffer[indexOfPosition[index-1]+1:indexOfPosition[index]])
-                print('mi:',midNumber)
-                
+                midNumber=self.buffer[indexOfPosition[index-1]+1:indexOfPosition[index]]
+            #a position for the middle number in the interval
             self.setMP(indexOfPosition[index]+self.backCounter)
-            return midNumber
+            
+            return int(midNumber)
         return -1
 
     def readNumbers(self):
@@ -129,11 +147,9 @@ fSet='/media/zed/NTB/Dev/set.txt'
 fs='set.txt'
 t='testBin.dat'
 
-with open(t,mode='rt') as f:
+with open(fs,mode='rt') as f:
     bs=BinSearch(f)
-    print(bs.midNumber,bs.getMN(),bs.getMP())
-
-    #f.seek(position-1)
-    #print(f.read(1))
-
-#print(last, ' ', number, ' ', position)
+    t=bs.search()
+    print(' self.midNumber {0},self.getMN(){1},self.getMP(){2}'.format(t[0],t[1],t[2]))
+    
+   
