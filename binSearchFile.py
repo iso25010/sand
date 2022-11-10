@@ -147,7 +147,7 @@ fSet='/media/zed/NTB/Dev/set.txt'
 fs='set.txt'
 t='testBin.dat'
 
-with open(fs,mode='rt') as f:
+with open(t,mode='rt') as f:
     bs=BinSearch(f)
     t=bs.search()
     print(' self.midNumber {0},self.getMN(){1},self.getMP(){2}'.format(t[0],t[1],t[2]))
