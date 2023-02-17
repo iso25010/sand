@@ -11,7 +11,7 @@ text=tk.Text(root,font=('Arial',16),height=3)
 text.pack(padx=100)
 
 myentry=tk.Entry(root)
-myentry.pack(fill='x')
+myentry.pack(fill='y',side='left')
 
 
 root.mainloop()
