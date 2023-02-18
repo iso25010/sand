@@ -23,11 +23,11 @@ b4.grid(row=1,column=1,sticky='we')
 
 myframe.pack(fill='x')
 
-mylabel=tk.Label(window,text='Text field',foreground='red',background='yellow',font=('Arial',18))
-mylabel.pack(side='top',padx=20,pady=20,fill='both')
+mylabel=tk.Label(window,text='Text field',foreground='yellow',background='blue',font=('Arial',18),height=1)
+mylabel.pack(side='top',padx=20,pady=5,ipadx=2,ipady=2)
 
 mytext=tk.Text(window)
-mytext.pack(padx=20,pady=20,side='bottom')
+mytext.pack(padx=20,pady=2,side='bottom')
 
 window.mainloop()
 
