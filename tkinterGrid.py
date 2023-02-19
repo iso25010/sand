@@ -27,7 +27,7 @@ mylabel=tk.Label(window,text='Text field',foreground='yellow',background='blue',
 mylabel.pack(side='top',padx=20,pady=5,ipadx=2,ipady=2)
 
 mytext=tk.Text(window)
-mytext.pack(padx=20,pady=2,side='bottom')
+mytext.pack(padx=20,pady=10,side='bottom')
 
 window.mainloop()
 
