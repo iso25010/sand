@@ -1,33 +1,49 @@
 import tkinter as tk
 
+
+def importRep():
+    print(fileEntry.get())
+
 window=tk.Tk()
-window.geometry('500x500')
-window.title('Grid')
-
-myframe=tk.Frame(window)
-myframe.columnconfigure(0,weight=5)
-myframe.columnconfigure(1,weight=2)
-
-b1=tk.Button(myframe,text='B1',foreground='green')
-b1.grid(row=0,column=0,sticky='we')
-
-b2=tk.Button(myframe,text='B2')
-b2.grid(row=0,column=1,sticky='we')
-
-b3=tk.Button(myframe,text='B3')
-b3.grid(row=1,column=0,sticky='we')
-
-b4=tk.Button(myframe,text='B4')
-b4.grid(row=1,column=1,sticky='we')
+window.geometry('900x650')
+window.title('Report Importer')
 
 
-myframe.pack(fill='x')
+#Frame #1 --------------
+myframe1=tk.LabelFrame(window,text='Input')
 
-mylabel=tk.Label(window,text='Text field',foreground='yellow',background='blue',font=('Arial',18),height=1)
-mylabel.pack(side='top',padx=20,pady=5,ipadx=2,ipady=2)
 
-mytext=tk.Text(window)
-mytext.pack(padx=20,pady=10,side='bottom')
+myframe1.columnconfigure(0,weight=5)
+myframe1.columnconfigure(1,weight=1)
+
+inputLabel=tk.Label(myframe1,text='Input Files (mask)',font=('Arial',12),height=1)
+inputLabel.grid(row=0,column=0,sticky='w')
+
+fileEntry=tk.Entry(myframe1,font=('Currier',12))
+fileEntry.grid(row=1,column=0,sticky='we')
+
+pinCheck=tk.Checkbutton(myframe1,text='Default',height=1)
+pinCheck.grid(row=1,column=1,sticky='we')
+
+importButton=tk.Button(myframe1,text='Import Files',command=importRep)
+importButton.grid(row=2,column=0)
+
+#Frame #2 ---------------
+myframe2=tk.LabelFrame(window,text='Console')
+myframe2.columnconfigure(0,weight=5)
+myframe2.columnconfigure(1,weight=1)
+
+importedLabel=tk.Label(myframe2,text='Imported',font=('Arial',12),height=1)
+importedLabel.grid(row=0,column=0)
+
+myText=tk.Text(myframe2,font=('Currier',12))
+myText.grid(row=1,column=0,sticky='nswe')
+
+
+#Packing
+myframe1.pack(fill='x',padx=20,pady=20)
+myframe2.pack(fill='x',padx=20)
+
 
 window.mainloop()
 
