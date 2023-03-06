@@ -2,12 +2,15 @@ import tkinter as tk
 
 
 def importRep():
-    print(fileEntry.get())
-    print(default.get())
+    #print(fileEntry.get())
+    #print(default.get())
+
+    myText.insert('0.0',fileEntry.get()+'\n')
+    print(self)
 
 
 window=tk.Tk()
-window.geometry('900x700')
+window.geometry('1000x500')
 window.title('Report Importer')
 
 
@@ -23,7 +26,7 @@ inputLabel.grid(row=0,column=0,sticky='w',pady=10)
 
 anEntry=tk.StringVar(value='Gogo ...')
 fileEntry=tk.Entry(myframe1,font=('Currier',12))
-fileEntry.grid(row=1,column=0,sticky='we',pady=3)
+fileEntry.grid(row=1,column=0,sticky='we',pady=3,padx=3)
 
  # Tell the entry widget to watch this variable.
 fileEntry["textvariable"] = anEntry
@@ -39,14 +42,14 @@ importButton.grid(row=2,column=0,pady=10)
 #Frame #2 ---------------
 myframe2=tk.LabelFrame(window,text='Console')
 myframe2.columnconfigure(0,weight=5)
-myframe2.columnconfigure(1,weight=1)
+#myframe2.columnconfigure(1,weight=1)
 
 importedLabel=tk.Label(myframe2,text='Imported',font=('Arial',12),height=1)
 importedLabel.grid(row=0,column=0)
 
 
-myText=tk.Text(myframe2,font=('Currier',12))
-myText.grid(row=1,column=0,sticky='nswe')
+myText=tk.Text(myframe2,font=('Currier',12),height=13)
+myText.grid(row=1,column=0,sticky='nswe',padx=3)
 
 
 
