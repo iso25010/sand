@@ -6,7 +6,7 @@ def importRep():
     #print(default.get())
 
     myText.insert('0.0',fileEntry.get()+'\n')
-    print(self)
+    
 
 
 window=tk.Tk()
