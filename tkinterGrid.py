@@ -2,9 +2,7 @@ import tkinter as tk
 
 
 def importRep():
-    #print(fileEntry.get())
-    #print(default.get())
-
+    
     myText.insert('0.0',fileEntry.get()+'\n')
     
 
