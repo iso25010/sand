@@ -11,4 +11,4 @@ def fob(f,fn=[0,1]):
     #print (fn)
     fob(f-1,fn)
 
-fob(17)
+fob(int(input('Enter a number: ')))
